@@ -4,7 +4,7 @@ Siply
 
 ## ✨ Features
 * **Intro Onboarding:** Clean branding and splash layout.
-* **Home Feed:** Dynamic search, promo banners, and item listing.
+* **Home Feed:** promo banners, and item listing.
 * **Details Page:** Interactive quantity controls and item customization.
 * **Cart Management:** Real-time total calculation powered by Provider.
 
