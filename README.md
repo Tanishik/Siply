@@ -6,7 +6,7 @@ Siply
 * **Intro Onboarding:** Clean branding and splash layout.
 * **Home Feed:** Dynamic search, promo banners, and item listing.
 * **Details Page:** Interactive quantity controls and item customization.
-* **Cart Management:** Real-time total calculation powered by Provider + a playful empty-cart state `... ( °ヮ° )?`.
+* **Cart Management:** Real-time total calculation powered by Provider.
 
 ## 🛠️ Tech Stack
 * **Framework:** Flutter
