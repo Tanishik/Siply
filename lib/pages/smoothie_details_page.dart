@@ -70,7 +70,7 @@ class _SmoothieDetailsPageState extends State<SmoothieDetailsPage> {
               children: [
                 SizedBox(height: 40),
 
-                Image.asset(widget._smoothieModel.imagePath, height: 400),
+                Image.asset(widget._smoothieModel.imagePath, height: 500),
 
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),

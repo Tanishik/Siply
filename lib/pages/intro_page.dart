@@ -14,8 +14,11 @@ class IntroPage extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 50),
+
+            SizedBox(height: 30,),
+           
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +29,7 @@ class IntroPage extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(width: 50),
+                  
 
                     Text(
                       "Taste the Difference",
@@ -40,9 +43,11 @@ class IntroPage extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 30),
+            
 
             SizedBox(height: 400, child: Image.asset("assets/BlueBerry.png")),
+
+            
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -59,7 +64,7 @@ class IntroPage extends StatelessWidget {
               ],
             ),
 
-            Spacer(),
+         
 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -81,7 +86,7 @@ class IntroPage extends StatelessWidget {
                       icon: Icon(
                         Icons.arrow_forward,
                         color: Colors.white,
-                        size: 30,
+                        size: 50,
                       ),
                     ),
                   ),
