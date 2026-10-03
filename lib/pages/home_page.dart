@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:siply/components/my_text_field.dart';
 import 'package:siply/components/promo_tile.dart';
 import 'package:siply/components/tiles.dart';
+import 'package:siply/cubits/smoothie_cubit.dart';
+import 'package:siply/cubits/smoothie_state.dart';
 import 'package:siply/pages/smoothie_details_page.dart';
-import 'package:siply/providers/smoothie_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,8 +14,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Consumer<SmoothieProvider>(
-        builder: (context, value, child) => Column(
+      body: BlocBuilder<SmoothieCubit, SmoothieState>(
+        builder: (context, state) => Column(
           children: [
             SizedBox(height: 40),
 
@@ -75,7 +76,7 @@ class HomePage extends StatelessWidget {
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: value.smoothieList.length,
+                      itemCount: state.smoothieList.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -85,12 +86,12 @@ class HomePage extends StatelessWidget {
                             bottom: 8.0,
                           ),
                           child: Tiles(
-                            smoothie: value.smoothieList[index],
+                            smoothie: state.smoothieList[index],
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SmoothieDetailsPage(
-                                  smoothieModel: value.smoothieList[index],
+                                  smoothieModel: state.smoothieList[index],
                                 ),
                               ),
                             ),

@@ -1,9 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:siply/cubits/smoothie_state.dart';
 import 'package:siply/model/smothie_model.dart';
 
-class SmoothieProvider extends ChangeNotifier {
-  final List<SmoothieModel> _smoothieList = [
-    SmoothieModel(
+class SmoothieCubit extends Cubit<SmoothieState>{
+  SmoothieCubit():super(SmoothieState(
+    cartList: [], 
+    smoothieList: _initialSmoothies));
+
+    static final List<SmoothieModel> _initialSmoothies = [
+
+       SmoothieModel(
       imagePath: 'assets/Blueberry_Smoothie.png',
       name: 'Blueberry Smoothie',
       price: 14,
@@ -29,17 +35,18 @@ class SmoothieProvider extends ChangeNotifier {
       description:
           'Made with sweet, juicy mangoes blended to velvety perfection for a sunny, energizing boost packed with Vitamin C',
     ),
-  ];
 
-  final List _cartList = [];
-  List get smoothieList => _smoothieList;
-  List get cartList => _cartList;
+    ];
+
 
   void addToCart(SmoothieModel smoothie, int selectedQuantity) {
-    int index = _cartList.indexWhere((item) => item.name == smoothie.name);
+    final currentCart = List<SmoothieModel>.from(state.cartList);
+    
+
+    int index = currentCart.indexWhere((item) => item.name == smoothie.name);
 
     if (index != -1) {
-      _cartList[index].quantity += selectedQuantity;
+      currentCart[index].quantity += selectedQuantity;
     } else {
       SmoothieModel cartItem = SmoothieModel(
         imagePath: smoothie.imagePath,
@@ -47,39 +54,47 @@ class SmoothieProvider extends ChangeNotifier {
         price: smoothie.price,
         rating: '',
         description: '',
-        quantity: smoothie.quantity,
+        quantity: selectedQuantity, // using passed parameter
       );
-      _cartList.add(cartItem);
+      currentCart.add(cartItem);
     }
-    notifyListeners();
+
+ 
+    emit(state.copyWith(cartList: currentCart));
   }
+
 
   void incrementQuantity(SmoothieModel item) {
+    final currentCart = List<SmoothieModel>.from(state.cartList);
+    
     item.quantity++;
-    notifyListeners();
+
+    emit(state.copyWith(cartList: currentCart));
   }
 
+
   void decrementQuantity(SmoothieModel item) {
+    final currentCart = List<SmoothieModel>.from(state.cartList);
+
     if (item.quantity > 1) {
       item.quantity--;
     } else {
-      _cartList.remove(item);
+      currentCart.remove(item);
     }
-    notifyListeners();
+
+    emit(state.copyWith(cartList: currentCart));
   }
 
+
   double calculateTotal() {
-    double total = 0.0;
-    for (var item in _cartList) {
-      total += (item.price * item.quantity);
+    double total = 0;
+    for (var item in state.cartList) {
+      total += item.price * item.quantity;
     }
     return total;
   }
-
-  void removeFromCart(SmoothieModel smoothie) {
-    if (_cartList.contains(smoothie)) {
-      _cartList.remove(smoothie);
-    }
-    notifyListeners();
-  }
 }
+
+
+
+

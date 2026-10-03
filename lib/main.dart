@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:siply/cubits/smoothie_cubit.dart';
 import 'package:siply/pages/intro_page.dart';
-import 'package:siply/providers/smoothie_provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => SmoothieProvider()),
-      ],
-      child: const MyApp(),
-    ),
+   BlocProvider(
+    create: (context) => SmoothieCubit(),
+    child: const MyApp()),
   );
 }
 
